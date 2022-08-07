@@ -44,6 +44,7 @@ def get_data():
 
 @country_name.route('/countryNames/',methods=['GET','POST'])
 def countyName():
+  
     Country_list=df1['Country'].tolist()
     distinct_country_name=[]
     for con in Country_list:
@@ -116,6 +117,7 @@ def rural_data(year):
 
 @countrydataBy_date.route('/dataByDate/<string:country>/<int:year1>/',methods=['GET', 'POST'])
 def country_data_by_date(country,year1):
+   country=country[0].capitalize()+country[1:]
    if year1<1960:
     year1=1960
    year_for=year1
@@ -138,6 +140,7 @@ def country_data_by_date(country,year1):
 
 @predictions.route('/predict/<string:country>',methods=['GET','POST'])
 def predict_(country):
+  country=country[0].capitalize()+country[1:]
   temp_df=df1[df1['Country']==country]
   machine_learning_dict={"Year":temp_df['Year'],"Urban_Population":temp_df['Urban_Population_percentage']}
   machine_learning_df=pd.DataFrame(machine_learning_dict)
